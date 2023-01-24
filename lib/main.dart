@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/pages/products_overview_page.dart';
 
 void main() {
-  runApp(ShopApp());
+  runApp(const ShopApp());
 }
 
 class ShopApp extends StatelessWidget {
@@ -12,14 +13,8 @@ class ShopApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "ShopApp",
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("My app"),
-        ),
-        body: const Center(
-          child: Text("My App"),
-        ),
-      ),
+      theme: ThemeData(),
+      home: ProductsOverviewPage(),
     );
   }
 }
