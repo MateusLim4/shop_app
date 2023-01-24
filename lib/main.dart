@@ -10,6 +10,7 @@ class ShopApp extends StatelessWidget {
   @override
   build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "ShopApp",
       home: Scaffold(
         appBar: AppBar(
