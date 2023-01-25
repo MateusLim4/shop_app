@@ -9,27 +9,29 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final product = Provider.of<Product>(context);
+    final product = Provider.of<Product>(context, listen: false);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
-        footer: GridTileBar(
-          title: Text(product.title),
-          leading: IconButton(
-            onPressed: () {
-              product.toggleFavorite();
-            },
-            icon: Icon(
-                product.isFavorite ? Icons.favorite : Icons.favorite_border),
-            color: AppTheme.colors.secondary,
-          ),
-          trailing: IconButton(
-            icon: const Icon(
-              Icons.shopping_cart,
+        footer: Consumer<Product>(
+          builder: (context, product, _) => GridTileBar(
+            title: Text(product.title),
+            leading: IconButton(
+              onPressed: () {
+                product.toggleFavorite();
+              },
+              icon: Icon(
+                  product.isFavorite ? Icons.favorite : Icons.favorite_border),
+              color: AppTheme.colors.secondary,
             ),
-            onPressed: () {},
+            trailing: IconButton(
+              icon: const Icon(
+                Icons.shopping_cart,
+              ),
+              onPressed: () {},
+            ),
+            backgroundColor: AppTheme.colors.cardBackgroud,
           ),
-          backgroundColor: AppTheme.colors.cardBackgroud,
         ),
         child: GestureDetector(
           onTap: () {
