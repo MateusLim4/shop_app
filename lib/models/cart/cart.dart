@@ -47,7 +47,7 @@ class Cart with ChangeNotifier {
     notifyListeners();
   }
 
-  int get itensCount {
+  int get itemsCount {
     return _item.length;
   }
 
