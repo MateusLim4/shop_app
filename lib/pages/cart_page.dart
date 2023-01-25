@@ -35,7 +35,7 @@ class CartPage extends StatelessWidget {
                   Chip(
                     backgroundColor: AppTheme.colors.primary,
                     label: Text(
-                      "R\$${cart.totalAmount.roundToDouble()}",
+                      "R\$${cart.totalAmount.toStringAsFixed(2)}",
                       style: const TextStyle(color: Colors.white),
                     ),
                   ),

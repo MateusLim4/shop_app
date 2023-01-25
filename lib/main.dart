@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:shop_app/models/order/order_list.dart';
 import 'package:shop_app/models/product/product_list.dart';
 import 'package:shop_app/pages/cart_page.dart';
+import 'package:shop_app/pages/orders_page.dart';
 import 'package:shop_app/pages/product_detail_page.dart';
 import 'package:shop_app/pages/products_overview_page.dart';
 import 'package:shop_app/routes/routes.dart';
@@ -38,10 +39,11 @@ class ShopApp extends StatelessWidget {
             primarySwatch: AppTheme.colors.primarySwatch,
             backgroundColor: AppTheme.colors.background,
             fontFamily: GoogleFonts.lato().fontFamily),
-        home: const ProductsOverviewPage(),
         routes: {
+          AppRoutes.home: (context) => const ProductsOverviewPage(),
           AppRoutes.productDetail: (context) => const ProductDetailPage(),
           AppRoutes.cart: (context) => const CartPage(),
+          AppRoutes.orders: (context) => const OrdersPage()
         },
       ),
     );
