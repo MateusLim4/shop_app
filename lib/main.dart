@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app/models/order/order_list.dart';
 import 'package:shop_app/models/product/product_list.dart';
 import 'package:shop_app/pages/cart_page.dart';
 import 'package:shop_app/pages/product_detail_page.dart';
@@ -25,6 +26,9 @@ class ShopApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => Cart(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => OrderList(),
         )
       ],
       child: MaterialApp(
