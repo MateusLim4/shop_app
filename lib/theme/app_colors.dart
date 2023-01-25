@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
 abstract class IAppColors {
+  MaterialColor get primarySwatch;
   Color get primary;
   Color get secondary;
   Color get background;
   Color get button;
-  MaterialColor get primarySwatch;
+  Color get cardBackgroud;
 }
 
 class AppColors extends IAppColors {
+  @override
+  MaterialColor get primarySwatch => MaterialColor(0xffb20000, colorSwatch);
   @override
   Color get primary => const Color.fromARGB(255, 178, 0, 0);
   @override
@@ -17,9 +20,8 @@ class AppColors extends IAppColors {
   Color get button => const Color.fromARGB(255, 253, 176, 11);
   @override
   Color get background => const Color.fromARGB(255, 254, 244, 192);
-
   @override
-  MaterialColor get primarySwatch => MaterialColor(0xffb20000, colorSwatch);
+  Color get cardBackgroud => Colors.black54;
 }
 
 Map<int, Color> get colorSwatch => {
