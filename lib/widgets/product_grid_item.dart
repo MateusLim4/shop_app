@@ -5,8 +5,8 @@ import 'package:shop_app/routes/routes.dart';
 import '../models/product/product.dart';
 import '../theme/app_theme.dart';
 
-class ProductItem extends StatelessWidget {
-  const ProductItem({Key? key}) : super(key: key);
+class ProductGridItem extends StatelessWidget {
+  const ProductGridItem({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
