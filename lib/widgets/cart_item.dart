@@ -20,14 +20,15 @@ class CartItemWidget extends StatelessWidget {
         ).removeItem(cartItem.productId);
       },
       background: Container(
-        color: AppTheme.colors.secondary,
+        height: 15,
+        color: AppTheme.colors.error,
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.only(left: 20),
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
         child: const Icon(
           Icons.delete,
           color: Colors.white,
-          size: 40,
+          size: 30,
         ),
       ),
       child: Card(

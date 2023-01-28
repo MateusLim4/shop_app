@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app/models/cart/cart.dart';
+import 'package:shop_app/models/product/product_list.dart';
 import 'package:shop_app/routes/routes.dart';
 import '../models/product/product.dart';
 import '../theme/app_theme.dart';
@@ -33,6 +34,16 @@ class ProductGridItem extends StatelessWidget {
               ),
               onPressed: () {
                 cart.addItem(product);
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  duration: const Duration(seconds: 1),
+                  content: const Text("Produto adicionado ao carrinho!"),
+                  action: SnackBarAction(
+                    label: "Desfazer",
+                    onPressed: () {
+                      cart.removeSingleItem(product.id);
+                    },
+                  ),
+                ));
               },
             ),
             backgroundColor: AppTheme.colors.cardBackgroud,

@@ -56,7 +56,7 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
               icon: const Icon(Icons.shopping_cart),
             ),
             builder: (context, cart, child) =>
-                Badge(value: cart.itemsCount.toString(), child: child!),
+                BadgeWidget(value: cart.itemsCount.toString(), child: child!),
           )
         ],
       ),

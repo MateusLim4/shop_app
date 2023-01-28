@@ -36,8 +36,11 @@ class ShopApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: "ShopApp",
         theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(
+                seedColor: AppTheme.colors.primary,
+                brightness: Brightness.dark),
+            useMaterial3: true,
             primarySwatch: AppTheme.colors.primarySwatch,
-            backgroundColor: AppTheme.colors.background,
             fontFamily: GoogleFonts.lato().fontFamily),
         routes: {
           AppRoutes.home: (context) => const ProductsOverviewPage(),

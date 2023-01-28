@@ -7,6 +7,7 @@ abstract class IAppColors {
   Color get background;
   Color get button;
   Color get cardBackgroud;
+  Color get error;
 }
 
 class AppColors extends IAppColors {
@@ -22,6 +23,8 @@ class AppColors extends IAppColors {
   Color get background => const Color.fromARGB(255, 254, 244, 192);
   @override
   Color get cardBackgroud => Colors.black54;
+  @override
+  Color get error => const Color.fromARGB(255, 228, 9, 9);
 }
 
 Map<int, Color> get colorSwatch => {

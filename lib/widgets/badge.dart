@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/theme/app_theme.dart';
 
-class Badge extends StatelessWidget {
+class BadgeWidget extends StatelessWidget {
   final Widget child;
   final String value;
   final Color? color;
-  const Badge({Key? key, required this.child, required this.value, this.color})
+  const BadgeWidget(
+      {Key? key, required this.child, required this.value, this.color})
       : super(key: key);
 
   @override
