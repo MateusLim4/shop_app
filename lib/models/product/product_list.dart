@@ -4,15 +4,19 @@ import 'package:shop_app/models/product/product.dart';
 
 class ProductList with ChangeNotifier {
   final List<Product> _items = dummyProducts;
-  final List<Product> _favoriteItems =
-      dummyProducts.where((product) => product.isFavorite).toList();
 
   List<Product> get items => [..._items];
-  List<Product> get favoriteItems => [..._favoriteItems];
+
+  List<Product> get favoriteItems =>
+      _items.where((product) => product.isFavorite).toList();
 
   void addProduct(Product product) {
     _items.add(product);
     notifyListeners(); // Notifica todos widgets interessados após adicionar um widget
+  }
+
+  int get countItens {
+    return _items.length;
   }
 }
 
