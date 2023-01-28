@@ -19,6 +19,29 @@ class CartItemWidget extends StatelessWidget {
           listen: false,
         ).removeItem(cartItem.productId);
       },
+      confirmDismiss: (_) {
+        return showDialog(
+            context: context,
+            builder: (ctx) {
+              return AlertDialog(
+                title: const Text("Tem Certeza?"),
+                content:
+                    const Text("Quer realmente realizar a exclusão do item?"),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(ctx).pop(false);
+                      },
+                      child: Text("Não")),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(ctx).pop(true);
+                      },
+                      child: Text("Sim")),
+                ],
+              );
+            });
+      },
       background: Container(
         height: 15,
         color: AppTheme.colors.error,
