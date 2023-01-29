@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app/models/product/product_list.dart';
 
+import '../models/product/product.dart';
+
 class ProductFormPage extends StatefulWidget {
   const ProductFormPage({Key? key}) : super(key: key);
 
@@ -30,6 +32,25 @@ class _ProductFormPageState extends State<ProductFormPage> {
     _descriptionFocus.dispose();
     _imageURLController.removeListener(updateImage);
     _imageUrlFocus.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_formData.isEmpty) {
+      final arg = ModalRoute.of(context)?.settings.arguments;
+
+      if (arg != null) {
+        final product = arg as Product;
+        _formData['id'] = product.id;
+        _formData['name'] = product.title;
+        _formData['price'] = product.price;
+        _formData['description'] = product.description;
+        _formData['imageUrl'] = product.imageUrl;
+
+        _imageURLController.text = product.imageUrl;
+      }
+    }
   }
 
   void updateImage() {
@@ -72,6 +93,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
           child: ListView(
             children: [
               TextFormField(
+                initialValue: _formData['name']?.toString(),
                 decoration: const InputDecoration(labelText: "Nome"),
                 textInputAction: TextInputAction.next,
                 onFieldSubmitted: (_) {
@@ -93,6 +115,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                 },
               ),
               TextFormField(
+                initialValue: _formData['price']?.toString(),
                 decoration: const InputDecoration(labelText: "Preço"),
                 textInputAction: TextInputAction.next,
                 onFieldSubmitted: (_) {
@@ -115,6 +138,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                 },
               ),
               TextFormField(
+                initialValue: _formData['description']?.toString(),
                 decoration: const InputDecoration(labelText: "Descrição"),
                 focusNode: _descriptionFocus,
                 textInputAction: TextInputAction.next,

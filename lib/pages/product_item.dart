@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shop_app/models/product/product.dart';
+import 'package:shop_app/models/product/product_list.dart';
+import 'package:shop_app/routes/routes.dart';
 
 class ProductItem extends StatelessWidget {
   final Product product;
@@ -16,11 +19,40 @@ class ProductItem extends StatelessWidget {
         child: Row(
           children: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context)
+                    .pushNamed(AppRoutes.form, arguments: product);
+              },
               icon: const Icon(Icons.edit),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (_) {
+                      return AlertDialog(
+                        title: const Text("Deseja excluir?"),
+                        content: const Text(
+                            "Deseja realmente realizar a exclusão do produto? A Ação não pode ser desfeita!"),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("Não"),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Provider.of<ProductList>(context, listen: false)
+                                  .removeProduct(product);
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("Sim"),
+                          ),
+                        ],
+                      );
+                    });
+              },
               icon: const Icon(Icons.delete),
             )
           ],
