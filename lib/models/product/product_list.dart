@@ -33,35 +33,28 @@ class ProductList with ChangeNotifier {
     }
   }
 
-  Future<void> addProduct(Product product) {
-    final future = http.post(
-      Uri.parse("$_baseUrl/products.json"),
-      body: jsonEncode(
-        {
-          "name": product.title,
-          "price": product.price,
-          "description": product.description,
-          "imageUrl": product.imageUrl,
-          "isFavorite": product.isFavorite,
-        },
-      ),
+  Future<void> addProduct(Product product) async {
+    final response = await http.post(Uri.parse("$_baseUrl/products.json"),
+        body: jsonEncode(
+          {
+            "name": product.title,
+            "price": product.price,
+            "description": product.description,
+            "imageUrl": product.imageUrl,
+            "isFavorite": product.isFavorite,
+          },
+        ));
+    final id = jsonDecode(response.body)["name"];
+    _items.add(
+      Product(
+          id: id,
+          title: product.title,
+          description: product.description,
+          price: product.price,
+          imageUrl: product.imageUrl,
+          isFavorite: product.isFavorite),
     );
-
-    return future.then(
-      (response) {
-        final id = jsonDecode(response.body)["name"];
-        _items.add(
-          Product(
-              id: id,
-              title: product.title,
-              description: product.description,
-              price: product.price,
-              imageUrl: product.imageUrl,
-              isFavorite: product.isFavorite),
-        );
-        notifyListeners(); // Notifica todos widgets interessados após adicionar um widget
-      },
-    );
+    notifyListeners();
   }
 
   Future<void> updateProduct(Product product) {

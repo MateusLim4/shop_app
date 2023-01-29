@@ -68,18 +68,36 @@ class _ProductFormPageState extends State<ProductFormPage> {
     return isValidUrl;
   }
 
-  void submitForm() {
+  Future<void> submitForm() async {
     final isValid = _formKey.currentState?.validate() ?? false;
 
     if (isValid) {
       _formKey.currentState?.save();
       setState(() => _isLoading = true);
-      Provider.of<ProductList>(context, listen: false)
-          .addProductFromData(_formData)
-          .then((value) {
-        setState(() => _isLoading = false);
+      try {
+        await Provider.of<ProductList>(context, listen: false)
+            .addProductFromData(_formData);
+        // ignore: use_build_context_synchronously
         Navigator.of(context).pop();
-      });
+      } catch (error) {
+        showDialog(
+            context: context,
+            builder: (ctx) {
+              return AlertDialog(
+                title: const Text("Ocorreu um erro"),
+                content: const Text("Ocorreu um erro ao salvar o produto =("),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("Ok"))
+                ],
+              );
+            });
+      } finally {
+        setState(() => _isLoading = false);
+      }
     }
   }
 
