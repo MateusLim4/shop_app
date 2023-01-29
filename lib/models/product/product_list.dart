@@ -15,7 +15,7 @@ class ProductList with ChangeNotifier {
   List<Product> get favoriteItems =>
       _items.where((product) => product.isFavorite).toList();
 
-  void addProductFromData(Map<String, dynamic> data) {
+  Future<void> addProductFromData(Map<String, dynamic> data) {
     bool hasId = data['id'] != null;
 
     final product = Product(
@@ -27,13 +27,13 @@ class ProductList with ChangeNotifier {
     );
 
     if (hasId) {
-      updateProduct(product);
+      return updateProduct(product);
     } else {
-      addProduct(product);
+      return addProduct(product);
     }
   }
 
-  void addProduct(Product product) {
+  Future<void> addProduct(Product product) {
     final future = http.post(
       Uri.parse("$_baseUrl/products.json"),
       body: jsonEncode(
@@ -47,7 +47,7 @@ class ProductList with ChangeNotifier {
       ),
     );
 
-    future.then(
+    return future.then(
       (response) {
         final id = jsonDecode(response.body)["name"];
         _items.add(
@@ -64,12 +64,14 @@ class ProductList with ChangeNotifier {
     );
   }
 
-  void updateProduct(Product product) {
+  Future<void> updateProduct(Product product) {
     int index = _items.indexWhere((p) => p.id == product.id);
     if (index >= 0) {
       _items[index] = product;
       notifyListeners();
     }
+
+    return Future.value();
   }
 
   int get countItens {
