@@ -28,30 +28,34 @@ class ProductItem extends StatelessWidget {
             IconButton(
               onPressed: () {
                 showDialog(
-                    context: context,
-                    builder: (_) {
-                      return AlertDialog(
-                        title: const Text("Deseja excluir?"),
-                        content: const Text(
-                            "Deseja realmente realizar a exclusão do produto? A Ação não pode ser desfeita!"),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text("Não"),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Provider.of<ProductList>(context, listen: false)
-                                  .removeProduct(product);
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text("Sim"),
-                          ),
-                        ],
-                      );
-                    });
+                  context: context,
+                  builder: (_) {
+                    return AlertDialog(
+                      title: const Text("Deseja excluir?"),
+                      content: const Text(
+                          "Deseja realmente realizar a exclusão do produto? A Ação não pode ser desfeita!"),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(false);
+                          },
+                          child: const Text("Não"),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(true);
+                          },
+                          child: const Text("Sim"),
+                        ),
+                      ],
+                    );
+                  },
+                ).then((value) {
+                  if (value) {
+                    Provider.of<ProductList>(context, listen: false)
+                        .removeProduct(product);
+                  }
+                });
               },
               icon: const Icon(Icons.delete),
             )
