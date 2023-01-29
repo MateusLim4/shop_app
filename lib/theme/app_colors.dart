@@ -22,7 +22,7 @@ class AppColors extends IAppColors {
   @override
   Color get background => const Color.fromARGB(255, 254, 244, 192);
   @override
-  Color get cardBackgroud => Colors.black54;
+  Color get cardBackgroud => const Color.fromARGB(199, 0, 0, 0);
   @override
   Color get error => const Color.fromARGB(255, 228, 9, 9);
 }

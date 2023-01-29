@@ -40,6 +40,7 @@ class ShopApp extends StatelessWidget {
         theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(
                 seedColor: AppTheme.colors.primary,
+                error: Colors.red[300],
                 brightness: Brightness.dark),
             useMaterial3: true,
             primarySwatch: AppTheme.colors.primarySwatch,
