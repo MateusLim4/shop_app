@@ -21,7 +21,10 @@ class _OrderWidgetState extends State<OrderWidget> {
       child: Column(
         children: [
           ListTile(
-            title: Text("R\$ ${widget.order.total.toStringAsFixed(2)}"),
+            title: Text(
+              "R\$ ${widget.order.total.toStringAsFixed(2)}",
+              style: TextStyle(color: Theme.of(context).colorScheme.primary),
+            ),
             subtitle: Text(
               DateFormat("dd/MM/yyyy hh:mm").format(widget.order.date),
             ),
@@ -37,7 +40,7 @@ class _OrderWidgetState extends State<OrderWidget> {
           if (expanded)
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
-              height: (widget.order.products.length * 25) + 10,
+              height: (widget.order.products.length * 50) + 10,
               child: ListView(
                 children: widget.order.products.map(
                   (product) {

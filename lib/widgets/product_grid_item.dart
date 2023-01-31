@@ -24,10 +24,10 @@ class ProductGridItem extends StatelessWidget {
               },
               icon: Icon(
                   product.isFavorite ? Icons.favorite : Icons.favorite_border),
-              color: AppTheme.colors.secondary,
+              color: AppTheme.colors.primary,
             ),
             trailing: IconButton(
-              color: AppTheme.colors.secondary,
+              color: AppTheme.colors.primary,
               icon: const Icon(
                 Icons.shopping_cart,
               ),

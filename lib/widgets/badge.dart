@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/theme/app_theme.dart';
 
 class BadgeWidget extends StatelessWidget {
   final Widget child;
@@ -22,7 +21,7 @@ class BadgeWidget extends StatelessWidget {
               padding: const EdgeInsets.all(2),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: color ?? AppTheme.colors.secondary),
+                  color: color ?? Theme.of(context).colorScheme.onPrimary),
               constraints: const BoxConstraints(minHeight: 16, minWidth: 16),
               child: Text(
                 value,
