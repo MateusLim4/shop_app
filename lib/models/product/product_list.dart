@@ -3,11 +3,12 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shop_app/constants/constants.dart';
 import 'package:shop_app/exceptions/http_exception.dart';
 import 'package:shop_app/models/product/product.dart';
 
 class ProductList with ChangeNotifier {
-  final _baseUrl = "URL";
+  final _baseUrl = Constants.baseUrl;
   final List<Product> _items = [];
 
   List<Product> get items => [..._items];
