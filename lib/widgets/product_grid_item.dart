@@ -23,13 +23,15 @@ class ProductGridItem extends StatelessWidget {
                 product.toggleFavorite(product);
               },
               icon: Icon(
-                  product.isFavorite ? Icons.favorite : Icons.favorite_border),
+                product.isFavorite ? Icons.favorite : Icons.favorite_border,
+                color: Theme.of(context).colorScheme.primary,
+              ),
               color: AppTheme.colors.primary,
             ),
             trailing: IconButton(
-              color: AppTheme.colors.primary,
-              icon: const Icon(
+              icon: Icon(
                 Icons.shopping_cart,
+                color: Theme.of(context).colorScheme.primary,
               ),
               onPressed: () {
                 cart.addItem(product);
@@ -47,7 +49,7 @@ class ProductGridItem extends StatelessWidget {
                 ));
               },
             ),
-            backgroundColor: AppTheme.colors.cardBackgroud,
+            backgroundColor: Theme.of(context).colorScheme.primary,
           ),
         ),
         child: GestureDetector(

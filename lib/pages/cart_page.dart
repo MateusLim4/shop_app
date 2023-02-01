@@ -33,7 +33,7 @@ class CartPage extends StatelessWidget {
                   ),
                   const SizedBox(width: 10),
                   Chip(
-                    backgroundColor: AppTheme.colors.primary,
+                    backgroundColor: Theme.of(context).colorScheme.primary,
                     label: Text(
                       "R\$${cart.totalAmount.toStringAsFixed(2)}",
                       style: const TextStyle(color: Colors.white),

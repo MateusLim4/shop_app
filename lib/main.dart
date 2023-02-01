@@ -42,7 +42,7 @@ class ShopApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(
                 seedColor: AppTheme.colors.primary,
                 error: Colors.red[300],
-                brightness: Brightness.dark),
+                brightness: Brightness.light),
             useMaterial3: true,
             primarySwatch: AppTheme.colors.primarySwatch,
             fontFamily: GoogleFonts.lato().fontFamily),
