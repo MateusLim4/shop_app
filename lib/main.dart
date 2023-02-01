@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app/models/order/order_list.dart';
 import 'package:shop_app/models/product/product_list.dart';
+import 'package:shop_app/pages/auth_page.dart';
 import 'package:shop_app/pages/cart_page.dart';
 import 'package:shop_app/pages/orders_page.dart';
 import 'package:shop_app/pages/product_detail_page.dart';
@@ -46,6 +47,7 @@ class ShopApp extends StatelessWidget {
             primarySwatch: AppTheme.colors.primarySwatch,
             fontFamily: GoogleFonts.lato().fontFamily),
         routes: {
+          AppRoutes.auth: (context) => const AuthPage(),
           AppRoutes.home: (context) => const ProductsOverviewPage(),
           AppRoutes.productDetail: (context) => const ProductDetailPage(),
           AppRoutes.cart: (context) => const CartPage(),
