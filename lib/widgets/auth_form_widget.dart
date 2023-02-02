@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 enum AuthMode { signup, login }
 
 class AuthForm extends StatefulWidget {
-  AuthForm({Key? key}) : super(key: key);
+  const AuthForm({Key? key}) : super(key: key);
 
   @override
   State<AuthForm> createState() => _AuthFormState();
@@ -12,7 +12,7 @@ class AuthForm extends StatefulWidget {
 class _AuthFormState extends State<AuthForm> {
   final passwordController = TextEditingController();
   AuthMode authMode = AuthMode.login;
-  Map<String, String> _authData = {
+  final Map<String, String> _authData = {
     "email": "",
     "senha": "",
   };
@@ -38,6 +38,7 @@ class _AuthFormState extends State<AuthForm> {
                 keyboardType: TextInputType.emailAddress,
                 onSaved: (email) => _authData["email"] = email ?? '',
                 validator: (email) {
+                  // ignore: no_leading_underscores_for_local_identifiers
                   final _email = email ?? "";
                   if (_email.trim().isNotEmpty || !_email.contains("@")) {
                     return "Informe um email válido";
@@ -55,6 +56,7 @@ class _AuthFormState extends State<AuthForm> {
                   controller: passwordController,
                   onSaved: (password) => _authData["password"] = password ?? '',
                   validator: (password) {
+                    // ignore: no_leading_underscores_for_local_identifiers
                     final _password = password ?? "";
                     if (_password.isEmpty || _password.length < 5) {
                       return "Informe uma senha válida";
@@ -70,6 +72,7 @@ class _AuthFormState extends State<AuthForm> {
                   keyboardType: TextInputType.emailAddress,
                   obscureText: true,
                   validator: (password) {
+                    // ignore: no_leading_underscores_for_local_identifiers
                     final _password = password ?? "";
                     if (_password != passwordController.text) {
                       return "Senhas informadas não conferem";

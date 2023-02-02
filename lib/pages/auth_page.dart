@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shop_app/theme/app_theme.dart';
 import 'package:shop_app/widgets/auth_form_widget.dart';
 
 class AuthPage extends StatelessWidget {
@@ -48,7 +47,7 @@ class AuthPage extends StatelessWidget {
                   ),
                 ),
               ),
-              AuthForm(),
+              const AuthForm(),
             ],
           ),
         )
