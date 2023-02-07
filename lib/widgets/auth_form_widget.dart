@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/theme/app_theme.dart';
 
 enum AuthMode { signup, login }
 
@@ -10,13 +11,43 @@ class AuthForm extends StatefulWidget {
 }
 
 class _AuthFormState extends State<AuthForm> {
+  final _formKey = GlobalKey<FormState>();
+  bool _isLoading = false;
   final passwordController = TextEditingController();
   AuthMode authMode = AuthMode.login;
   final Map<String, String> _authData = {
     "email": "",
     "senha": "",
   };
-  _submit() {}
+
+  void _submit() {
+    final isValid = _formKey.currentState?.validate() ?? false;
+
+    if (!isValid) {
+      return;
+    }
+    setState(() => _isLoading = true);
+
+    _formKey.currentState?.save();
+
+    if (_isLogin()) {
+    } else {}
+
+    setState(() => _isLoading = false);
+  }
+
+  void _switchAuthMode() {
+    setState(() {
+      if (_isLogin()) {
+        authMode = AuthMode.signup;
+      } else {
+        authMode = AuthMode.login;
+      }
+    });
+  }
+
+  bool _isLogin() => authMode == AuthMode.login;
+  bool _isSignup() => authMode == AuthMode.signup;
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +56,11 @@ class _AuthFormState extends State<AuthForm> {
       elevation: 8,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Container(
-        height: 320,
+        height: _isLogin() ? 310 : 400,
         width: size.width * 0.75,
         padding: const EdgeInsets.all(16),
         child: Form(
+          key: _formKey,
           child: Column(
             children: [
               TextFormField(
@@ -64,37 +96,51 @@ class _AuthFormState extends State<AuthForm> {
                       return null;
                     }
                   }),
-              if (authMode == AuthMode.signup)
+              if (_isSignup())
                 TextFormField(
                   decoration: const InputDecoration(
                     labelText: "Confirmar Senha",
                   ),
                   keyboardType: TextInputType.emailAddress,
                   obscureText: true,
-                  validator: (password) {
-                    // ignore: no_leading_underscores_for_local_identifiers
-                    final _password = password ?? "";
-                    if (_password != passwordController.text) {
-                      return "Senhas informadas não conferem";
-                    } else {
-                      return null;
-                    }
-                  },
+                  validator: _isLogin()
+                      ? null
+                      : (password) {
+                          // ignore: no_leading_underscores_for_local_identifiers
+                          final _password = password ?? "";
+                          if (_password != passwordController.text) {
+                            return "Senhas informadas não conferem";
+                          } else {
+                            return null;
+                          }
+                        },
                 ),
               const SizedBox(
                 height: 20,
               ),
-              ElevatedButton(
-                onPressed: _submit,
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
+              if (_isLoading)
+                const CircularProgressIndicator()
+              else
+                ElevatedButton(
+                  onPressed: _submit,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 40),
                   ),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                  child: Text(
+                    _isLogin() ? "Login" : "Cadastrar",
+                    style: const TextStyle(color: Colors.white),
+                  ),
                 ),
-                child: Text(authMode == AuthMode.login ? "Login" : "Cadastrar"),
-              )
+              const Spacer(),
+              TextButton(
+                  onPressed: _switchAuthMode,
+                  child: Text(
+                      _isLogin() ? "Cadastre-se!" : "Já possui uma conta?"))
             ],
           ),
         ),
