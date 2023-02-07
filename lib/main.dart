@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app/models/auth/auth.dart';
 import 'package:shop_app/models/order/order_list.dart';
 import 'package:shop_app/models/product/product_list.dart';
 import 'package:shop_app/pages/auth_page.dart';
@@ -33,7 +34,8 @@ class ShopApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => OrderList(),
-        )
+        ),
+        ChangeNotifierProvider(create: (_) => Auth())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/theme/app_theme.dart';
+import 'package:provider/provider.dart';
+
+import '../models/auth/auth.dart';
 
 enum AuthMode { signup, login }
 
@@ -13,6 +15,7 @@ class AuthForm extends StatefulWidget {
 class _AuthFormState extends State<AuthForm> {
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
+
   final passwordController = TextEditingController();
   AuthMode authMode = AuthMode.login;
   final Map<String, String> _authData = {
@@ -20,18 +23,29 @@ class _AuthFormState extends State<AuthForm> {
     "senha": "",
   };
 
-  void _submit() {
+  void _submit() async {
     final isValid = _formKey.currentState?.validate() ?? false;
 
     if (!isValid) {
       return;
     }
+
     setState(() => _isLoading = true);
 
     _formKey.currentState?.save();
+    Auth auth = Provider.of(context, listen: false);
 
     if (_isLogin()) {
-    } else {}
+      await auth.signin(
+        _authData["email"]!,
+        _authData["password"]!,
+      );
+    } else {
+      await auth.signup(
+        _authData["email"]!,
+        _authData["password"]!,
+      );
+    }
 
     setState(() => _isLoading = false);
   }
@@ -52,11 +66,12 @@ class _AuthFormState extends State<AuthForm> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return Card(
       elevation: 8,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Container(
-        height: _isLogin() ? 310 : 400,
+        height: _isLogin() ? 340 : 420,
         width: size.width * 0.75,
         padding: const EdgeInsets.all(16),
         child: Form(
@@ -72,7 +87,7 @@ class _AuthFormState extends State<AuthForm> {
                 validator: (email) {
                   // ignore: no_leading_underscores_for_local_identifiers
                   final _email = email ?? "";
-                  if (_email.trim().isNotEmpty || !_email.contains("@")) {
+                  if (_email.trim().isEmpty || !_email.contains("@")) {
                     return "Informe um email válido";
                   } else {
                     return null;
