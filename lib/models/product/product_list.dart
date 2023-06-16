@@ -9,10 +9,12 @@ import 'package:shop_app/models/product/product.dart';
 
 class ProductList with ChangeNotifier {
   final _baseUrl = Constants.baseUrl;
-  final List<Product> _items = [];
+  String _token;
+  List<Product> _items = [];
+
+  ProductList(this._token, this._items);
 
   List<Product> get items => [..._items];
-
   List<Product> get favoriteItems =>
       _items.where((product) => product.isFavorite).toList();
 
@@ -106,7 +108,7 @@ class ProductList with ChangeNotifier {
 
   Future<void> loadProducts() async {
     _items.clear();
-    final response = await http.get(Uri.parse("$_baseUrl.json"));
+    final response = await http.get(Uri.parse("$_baseUrl.json?auth=$_token"));
     if (response.body == "null") return;
     Map<String, dynamic> data = jsonDecode(response.body);
     data.forEach((productId, productData) {
